@@ -4,8 +4,8 @@
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "android": "expo start --android",
-    "eslint": "eslint ./ --ext .js,.jsx,.ts,.tsx",
-    "eslint:fix": "eslint ./ --ext .js,.jsx,.ts,.tsx --fix",
+    "eslint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "eslint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
     "ios": "expo start --ios",
     "prettier:check": "prettier **/*.{js,jsx,ts,tsx,json} --check",
     "prettier:write": "prettier **/*.{js,jsx,ts,tsx,json} --write",
@@ -16,11 +16,13 @@
   "dependencies": {
     "expo": "~48.0.9",
     "expo-status-bar": "~1.4.4",
+    "prop-types": "^15.8.1",
     "react": "18.2.0",
     "react-native": "0.71.6"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
+    "babel-plugin-module-resolver": "^5.0.0",
     "eslint": "^7.32.0 || ^8.2.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.8.0",

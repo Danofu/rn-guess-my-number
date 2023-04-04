@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
-import { StyleSheet, Text, View } from 'react-native';
-import { useState } from 'react';
+import { Alert, StyleSheet, Text, View } from 'react-native';
+import { useCallback, useRef, useState } from 'react';
 
 import NumberContainer from 'components/game/NumberContainer';
+import PrimaryButton from 'components/ui/PrimaryButton';
 import Title from 'components/ui/Title';
 
 const generateRandomBetween = (min, max, exclude) => {
@@ -15,8 +16,38 @@ const generateRandomBetween = (min, max, exclude) => {
 };
 
 function GameScreen({ guessNumber }) {
-  const initialGuess = generateRandomBetween(1, 100, guessNumber);
+  const minBoundary = useRef(1);
+  const maxBoundary = useRef(100);
+  const initialGuess = generateRandomBetween(minBoundary.current, maxBoundary.current, guessNumber);
   const [currentGuess, setCurrentGuess] = useState(initialGuess);
+
+  const nextGuessHandler = useCallback(
+    (direction) => {
+      if (
+        (direction === 'lower' && currentGuess < guessNumber) ||
+        (direction === 'greater' && currentGuess > guessNumber)
+      ) {
+        Alert.alert("Don't lie !", 'You know that this is wrong...', [{ text: 'Sorry !', style: 'cancel' }]);
+        return;
+      }
+
+      switch (direction) {
+        case 'lower':
+          maxBoundary.current = currentGuess;
+          break;
+        default:
+          minBoundary.current = currentGuess + 1;
+          break;
+      }
+
+      const newGuess = generateRandomBetween(minBoundary.current, maxBoundary.current, currentGuess);
+      setCurrentGuess(newGuess);
+    },
+    [currentGuess, guessNumber]
+  );
+
+  const nextGreaterGuessHandler = useCallback(() => nextGuessHandler.bind(this, 'greater')(), [nextGuessHandler]);
+  const nextLowerGuessHandler = useCallback(() => nextGuessHandler.bind(this, 'lower')(), [nextGuessHandler]);
 
   return (
     <View style={styles.screen}>
@@ -24,7 +55,10 @@ function GameScreen({ guessNumber }) {
       <NumberContainer>{currentGuess}</NumberContainer>
       <View>
         <Text>Higher or lower ?</Text>
-        {/* + -*/}
+        <View>
+          <PrimaryButton onPress={nextGreaterGuessHandler}>+</PrimaryButton>
+          <PrimaryButton onPress={nextLowerGuessHandler}>-</PrimaryButton>
+        </View>
       </View>
       {/* <View>LOG ROUNDS</View> */}
     </View>
@@ -35,10 +69,9 @@ export default GameScreen;
 
 GameScreen.propTypes = {
   guessNumber: PropTypes.number.isRequired,
-}
-
-GameScreen.defautlProps = {
 };
+
+GameScreen.defautlProps = {};
 
 const styles = StyleSheet.create({
   screen: {

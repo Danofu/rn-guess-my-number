@@ -1,7 +1,9 @@
 import PropTypes from 'prop-types';
-import { Alert, StyleSheet, Text, View } from 'react-native';
+import { Alert, StyleSheet, View } from 'react-native';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
+import Card from 'components/ui/Card';
+import InstructionText from 'components/ui/InstructionText';
 import NumberContainer from 'components/game/NumberContainer';
 import PrimaryButton from 'components/ui/PrimaryButton';
 import Title from 'components/ui/Title';
@@ -59,13 +61,13 @@ function GameScreen({ guessNumber, onGameOver }) {
     <View style={styles.screen}>
       <Title>Opponent&apos;s Guess</Title>
       <NumberContainer>{currentGuess}</NumberContainer>
-      <View>
-        <Text>Higher or lower ?</Text>
+      <Card>
+        <InstructionText>Higher or lower ?</InstructionText>
         <View>
           <PrimaryButton onPress={nextGreaterGuessHandler}>+</PrimaryButton>
           <PrimaryButton onPress={nextLowerGuessHandler}>-</PrimaryButton>
         </View>
-      </View>
+      </Card>
       {/* <View>LOG ROUNDS</View> */}
     </View>
   );

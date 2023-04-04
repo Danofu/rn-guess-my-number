@@ -1,15 +1,24 @@
-import { LinearGradient } from 'expo-linear-gradient';
+import * as SplashScreen from 'expo-splash-screen';
 import { ImageBackground, SafeAreaView, StyleSheet } from 'react-native';
-import { useState } from 'react';
+import { LinearGradient } from 'expo-linear-gradient';
+import { useFonts } from 'expo-font';
+import { useCallback, useState } from 'react';
 
 import Colors from 'constants/colors';
 import GameOverScreen from 'screens/GameOverScreen';
 import GameScreen from 'screens/GameScreen';
 import StartGameScreen from 'screens/StartGameScreen';
 
+SplashScreen.preventAutoHideAsync().then();
+
 export default function App() {
   const [userNumber, setUserNumber] = useState(0);
   const [gameIsOver, setGameIsOver] = useState(true);
+
+  const [fontsLoaded] = useFonts({
+    'open-sans': require('fonts/OpenSans-Regular.ttf'),
+    'open-sans-bold': require('fonts/OpenSans-Bold.ttf'),
+  });
 
   const startGameHandler = (number) => {
     setUserNumber(number);
@@ -17,6 +26,12 @@ export default function App() {
   };
 
   const gameOverHandler = () => setGameIsOver(true);
+
+  const layoutChangHandler = useCallback(async () => {
+    if (fontsLoaded) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
 
   let screen = <StartGameScreen onGameStart={startGameHandler} />;
 
@@ -28,12 +43,20 @@ export default function App() {
     screen = <GameOverScreen />;
   }
 
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
-    <LinearGradient colors={[Colors.primary700, Colors.accent500]} style={styles.rootScreen}>
+    <LinearGradient
+      colors={[Colors.primary700, Colors.accent500]}
+      onLayout={layoutChangHandler}
+      style={styles.rootScreen}
+    >
       <ImageBackground
         imageStyle={styles.backgroundImage}
         resizeMode="cover"
-        source={require('./assets/images/background.png')}
+        source={require('images/background.png')}
         style={styles.rootScreen}
       >
         <SafeAreaView style={styles.rootScreen}>{screen}</SafeAreaView>

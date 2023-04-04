@@ -1,10 +1,18 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 import StartGameScreen from 'screens/StartGameScreen';
 
 export default function App() {
-  return <StartGameScreen />;
+  return (
+    <View style={styles.rootScreen}>
+      <StartGameScreen />
+    </View>
+  );
 }
 
-// eslint-disable-next-line no-unused-vars
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  rootScreen: {
+    flex: 1,
+    backgroundColor: '#DDB52F',
+  },
+});

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { Alert, StyleSheet, Text, View } from 'react-native';
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import NumberContainer from 'components/game/NumberContainer';
 import PrimaryButton from 'components/ui/PrimaryButton';
@@ -15,10 +15,10 @@ const generateRandomBetween = (min, max, exclude) => {
   return rndNum;
 };
 
-function GameScreen({ guessNumber }) {
+function GameScreen({ guessNumber, onGameOver }) {
   const minBoundary = useRef(1);
   const maxBoundary = useRef(100);
-  const initialGuess = generateRandomBetween(minBoundary.current, maxBoundary.current, guessNumber);
+  const initialGuess = generateRandomBetween(1, 100, guessNumber);
   const [currentGuess, setCurrentGuess] = useState(initialGuess);
 
   const nextGuessHandler = useCallback(
@@ -49,6 +49,12 @@ function GameScreen({ guessNumber }) {
   const nextGreaterGuessHandler = useCallback(() => nextGuessHandler.bind(this, 'greater')(), [nextGuessHandler]);
   const nextLowerGuessHandler = useCallback(() => nextGuessHandler.bind(this, 'lower')(), [nextGuessHandler]);
 
+  useEffect(() => {
+    if (currentGuess === guessNumber) {
+      onGameOver();
+    }
+  }, [currentGuess, guessNumber, onGameOver]);
+
   return (
     <View style={styles.screen}>
       <Title>Opponent&apos;s Guess</Title>
@@ -69,9 +75,12 @@ export default GameScreen;
 
 GameScreen.propTypes = {
   guessNumber: PropTypes.number.isRequired,
+  onGameOver: PropTypes.func,
 };
 
-GameScreen.defautlProps = {};
+GameScreen.defaultProps = {
+  onGameOver: () => {}
+};
 
 const styles = StyleSheet.create({
   screen: {

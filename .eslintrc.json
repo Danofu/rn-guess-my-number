@@ -13,7 +13,7 @@
   "rules": {
     "global-require": "off",
     "no-use-before-define": ["error", { "variables": false }],
-    "react/style-prop-object": ["error", { "allow": ["StatusBar"] }]
+    "react/forbid-prop-types": ["error", { "forbid": ["any"] }]
   },
   "settings": {
     "import/resolver": {

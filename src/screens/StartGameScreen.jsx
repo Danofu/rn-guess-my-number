@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { Alert, StyleSheet, TextInput, View } from 'react-native';
 import { useState } from 'react';
 
-import Card from 'components/ui/Card'
+import Card from 'components/ui/Card';
 import Colors from 'constants/colors';
 import InstructionText from 'components/ui/InstructionText';
 import PrimaryButton from 'components/ui/PrimaryButton';
@@ -59,7 +59,7 @@ StartGameScreen.propTypes = {
 };
 
 StartGameScreen.defaultProps = {
-  onGameStart: () => {}
+  onGameStart: () => {},
 };
 
 export default StartGameScreen;
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
     marginTop: 100,
-    alignItems: 'center'
+    alignItems: 'center',
   },
   numberInput: {
     width: 50,

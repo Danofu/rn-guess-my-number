@@ -1,15 +1,12 @@
 import PropTypes from 'prop-types';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
-function PrimaryButton({ children }) {
-  // eslint-disable-next-line no-console
-  const pressHandler = () => console.log(`[ PrimaryButton ]: onPress fires`);
-
+function PrimaryButton({ children, onPress }) {
   return (
     <View style={styles.buttonOuterContainer}>
       <Pressable
         style={({ pressed }) => (pressed ? [styles.buttonInnerContainer, styles.pressed] : styles.buttonInnerContainer)}
-        onPress={pressHandler}
+        onPress={onPress}
         android_ripple={{ color: '#640233' }}
       >
         <Text style={styles.buttonText}>{children}</Text>
@@ -20,10 +17,12 @@ function PrimaryButton({ children }) {
 
 PrimaryButton.propTypes = {
   children: PropTypes.node,
+  onPress: PropTypes.func,
 };
 
 PrimaryButton.defaultProps = {
   children: undefined,
+  onPress: undefined,
 };
 
 export default PrimaryButton;

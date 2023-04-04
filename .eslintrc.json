@@ -11,6 +11,7 @@
   },
   "plugins": ["react", "react-native"],
   "rules": {
+    "global-require": "off",
     "no-use-before-define": ["error", { "variables": false }],
     "react/style-prop-object": ["error", { "allow": ["StatusBar"] }]
   },

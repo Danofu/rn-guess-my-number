@@ -1,12 +1,19 @@
 import { LinearGradient } from 'expo-linear-gradient';
-import { StyleSheet } from 'react-native';
+import { ImageBackground, StyleSheet } from 'react-native';
 
 import StartGameScreen from 'screens/StartGameScreen';
 
 export default function App() {
   return (
     <LinearGradient colors={['#4E0329', '#DDB52F']} style={styles.rootScreen}>
-      <StartGameScreen />
+      <ImageBackground
+        imageStyle={styles.backgroundImage}
+        resizeMode="cover"
+        source={require('./assets/images/background.png')}
+        style={styles.rootScreen}
+      >
+        <StartGameScreen />
+      </ImageBackground>
     </LinearGradient>
   );
 }
@@ -14,6 +21,8 @@ export default function App() {
 const styles = StyleSheet.create({
   rootScreen: {
     flex: 1,
-    backgroundColor: '#DDB52F',
+  },
+  backgroundImage: {
+    opacity: 0.15,
   },
 });

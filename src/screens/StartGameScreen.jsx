@@ -2,8 +2,9 @@ import { Alert, StyleSheet, TextInput, View } from 'react-native';
 import { useState } from 'react';
 
 import PrimaryButton from 'components/PrimaryButton';
+import PropTypes from 'prop-types';
 
-function StartGameScreen() {
+function StartGameScreen({ onGameStart }) {
   const [enteredNumber, setEnteredNumber] = useState('');
 
   const numberInputHandler = (text) => setEnteredNumber(text);
@@ -19,8 +20,7 @@ function StartGameScreen() {
       return;
     }
 
-    // eslint-disable-next-line no-console
-    console.log('[ StartGameScreen ]: Valid number !');
+    onGameStart(number);
   };
 
   return (
@@ -45,6 +45,14 @@ function StartGameScreen() {
     </View>
   );
 }
+
+StartGameScreen.propTypes = {
+  onGameStart: PropTypes.func,
+};
+
+StartGameScreen.defaultProps = {
+  onGameStart: () => {}
+};
 
 export default StartGameScreen;
 

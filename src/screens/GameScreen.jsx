@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { Alert, StyleSheet, View } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import Card from 'components/ui/Card';
@@ -65,10 +66,14 @@ function GameScreen({ guessNumber, onGameOver }) {
         <InstructionText style={styles.instructionText}>Higher or lower ?</InstructionText>
         <View style={styles.buttonsContainer}>
           <View style={styles.buttonContainer}>
-            <PrimaryButton onPress={nextLowerGuessHandler}>-</PrimaryButton>
+            <PrimaryButton onPress={nextLowerGuessHandler}>
+              <Ionicons name="md-remove" size={24} color="white" />
+            </PrimaryButton>
           </View>
           <View style={styles.buttonContainer}>
-            <PrimaryButton onPress={nextGreaterGuessHandler}>+</PrimaryButton>
+            <PrimaryButton onPress={nextGreaterGuessHandler}>
+              <Ionicons name="md-add" size={24} color="white" />
+            </PrimaryButton>
           </View>
         </View>
       </Card>

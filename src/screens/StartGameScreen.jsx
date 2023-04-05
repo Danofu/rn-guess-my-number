@@ -6,7 +6,7 @@ import {
   StyleSheet,
   TextInput,
   useWindowDimensions,
-  View
+  View,
 } from 'react-native';
 import { useState } from 'react';
 
@@ -82,7 +82,7 @@ export default StartGameScreen;
 
 const styles = StyleSheet.create({
   screen: {
-    flex: 1
+    flex: 1,
   },
   rootContainer: {
     flex: 1,

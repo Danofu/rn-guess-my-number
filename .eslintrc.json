@@ -18,7 +18,8 @@
   "settings": {
     "import/resolver": {
       "node": {
-        "paths": ["src", "assets"]
+        "paths": ["src", "assets"],
+        "extensions": [".js", ".jsx", ".android.jsx", ".ios.jsx"]
       }
     }
   }

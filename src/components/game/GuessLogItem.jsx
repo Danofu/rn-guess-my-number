@@ -39,9 +39,9 @@ const styles = StyleSheet.create({
     shadowColor: 'black',
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.25,
-    shadowRadius: 3
+    shadowRadius: 3,
   },
   itemText: {
-    fontFamily: 'open-sans'
-  }
+    fontFamily: 'open-sans',
+  },
 });

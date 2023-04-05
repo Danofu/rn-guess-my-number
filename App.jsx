@@ -29,7 +29,7 @@ export default function App() {
   const gameOverHandler = (numberOfRounds) => {
     setGameIsOver(true);
     setGuessRounds(numberOfRounds);
-  }
+  };
 
   const layoutChangHandler = useCallback(async () => {
     if (fontsLoaded) {
@@ -40,7 +40,7 @@ export default function App() {
   const startNewGameHandler = () => {
     setUserNumber(0);
     setGuessRounds(0);
-  }
+  };
 
   let screen = <StartGameScreen onGameStart={startGameHandler} />;
 
@@ -49,7 +49,9 @@ export default function App() {
   }
 
   if (gameIsOver && userNumber) {
-    screen = <GameOverScreen onStartNewGame={startNewGameHandler} guessNumber={userNumber} roundsNumber={guessRounds} />;
+    screen = (
+      <GameOverScreen onStartNewGame={startNewGameHandler} guessNumber={userNumber} roundsNumber={guessRounds} />
+    );
   }
 
   if (!fontsLoaded) {

@@ -24,14 +24,14 @@ function GameOverScreen({ roundsNumber, guessNumber, onStartNewGame }) {
 GameOverScreen.propTypes = {
   roundsNumber: PropTypes.number,
   guessNumber: PropTypes.number,
-  onStartNewGame: PropTypes.func
-}
+  onStartNewGame: PropTypes.func,
+};
 
 GameOverScreen.defaultProps = {
   roundsNumber: NaN,
   guessNumber: NaN,
-  onStartNewGame: () => {}
-}
+  onStartNewGame: () => {},
+};
 
 export default GameOverScreen;
 
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     fontFamily: 'open-sans',
     fontSize: 24,
     textAlign: 'center',
-    marginBottom: 24
+    marginBottom: 24,
   },
   highlight: {
     fontFamily: 'open-sans-bold',

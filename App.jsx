@@ -26,7 +26,10 @@ export default function App() {
     setGameIsOver(false);
   };
 
-  const gameOverHandler = () => setGameIsOver(true);
+  const gameOverHandler = (numberOfRounds) => {
+    setGameIsOver(true);
+    setGuessRounds(numberOfRounds);
+  }
 
   const layoutChangHandler = useCallback(async () => {
     if (fontsLoaded) {

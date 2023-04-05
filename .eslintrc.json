@@ -13,13 +13,14 @@
   "rules": {
     "global-require": "off",
     "no-use-before-define": ["error", { "variables": false }],
-    "react/forbid-prop-types": ["error", { "forbid": ["any"] }]
+    "react/forbid-prop-types": ["error", { "forbid": ["any"] }],
+    "react/style-prop-object": ["error", { "allow": ["StatusBar"] }]
   },
   "settings": {
     "import/resolver": {
       "node": {
-        "paths": ["src", "assets"],
-        "extensions": [".js", ".jsx", ".android.jsx", ".ios.jsx"]
+        "paths": ["src", "assets", "node_modules"],
+        "extensions": [".js", ".android.js", ".ios.js", ".jsx", ".android.jsx", ".ios.jsx"]
       }
     }
   }

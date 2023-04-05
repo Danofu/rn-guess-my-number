@@ -1,10 +1,11 @@
+import PropTypes from 'prop-types';
 import { Image, StyleSheet, Text, View } from 'react-native';
 
 import Colors from 'constants/colors';
 import PrimaryButton from 'components/ui/PrimaryButton';
 import Title from 'components/ui/Title';
 
-function GameOverScreen() {
+function GameOverScreen({ roundsNumber, guessNumber, onStartNewGame }) {
   return (
     <View style={styles.rootContainer}>
       <Title>GAME OVER !</Title>
@@ -12,12 +13,24 @@ function GameOverScreen() {
         <Image style={styles.image} source={require('images/success.png')} />
       </View>
       <Text style={styles.summaryText}>
-        Your phone needed <Text style={styles.highlight}>X</Text> rounds to guess the number{' '}
-        <Text style={styles.highlight}>Y</Text>.
+        Your phone needed <Text style={styles.highlight}>{roundsNumber}</Text> rounds to guess the number{' '}
+        <Text style={styles.highlight}>{guessNumber}</Text>.
       </Text>
-      <PrimaryButton>Start New Game</PrimaryButton>
+      <PrimaryButton onPress={onStartNewGame}>Start New Game</PrimaryButton>
     </View>
   );
+}
+
+GameOverScreen.propTypes = {
+  roundsNumber: PropTypes.number,
+  guessNumber: PropTypes.number,
+  onStartNewGame: PropTypes.func
+}
+
+GameOverScreen.defaultProps = {
+  roundsNumber: NaN,
+  guessNumber: NaN,
+  onStartNewGame: () => {}
 }
 
 export default GameOverScreen;

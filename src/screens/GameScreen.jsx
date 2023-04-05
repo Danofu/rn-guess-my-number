@@ -1,9 +1,10 @@
 import PropTypes from 'prop-types';
-import { Alert, FlatList, StyleSheet, Text, View } from 'react-native';
+import { Alert, FlatList, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import Card from 'components/ui/Card';
+import GuessLogItem from 'components/game/GuessLogItem';
 import InstructionText from 'components/ui/InstructionText';
 import NumberContainer from 'components/game/NumberContainer';
 import PrimaryButton from 'components/ui/PrimaryButton';
@@ -79,13 +80,13 @@ function GameScreen({ guessNumber, onGameOver }) {
           </View>
         </View>
       </Card>
-      <View>
-        <FlatList
-          data={guessRounds}
-          renderItem={(itemData) => <Text>{itemData.item}</Text>}
-          keyExtractor={(item) => item}
-        />
-      </View>
+      <FlatList
+        data={guessRounds}
+        renderItem={(itemData) => (
+          <GuessLogItem guess={itemData.item} roundNumber={guessRounds.length - itemData.index} />
+        )}
+        keyExtractor={(item) => item}
+      />
     </View>
   );
 }
